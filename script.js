@@ -96,10 +96,12 @@ var generatedPassword = "";
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
+
 // Add event listener to generate button
 generateBtn.addEventListener('click', runGenerator);
 
-// Function to prompt user for password options and store their choice in the passwordArray
+
+// Prompt user for password options and store their choice in an array
 function getPasswordOptions(message, array) {
   if (confirm(message)) {
     passwordArray = passwordArray.concat(array);
@@ -107,15 +109,13 @@ function getPasswordOptions(message, array) {
   }
 }
 
-
-// Function to generate randomized password with user input
+// Generate randomized password with user input
 function generatePassword(array) {
   for(i = 0; i < passwordLength; i++){
     var random = Math.floor(Math.random() * array.length);
     generatedPassword += array[random].toString();
   }
 }
-
 
 // Write password to the #password input
 function writePassword() {
@@ -124,23 +124,20 @@ function writePassword() {
   passwordText.value = password;
 }
 
-
-
-
-
-
+// RUN GENERATOR FUNCTION
 function runGenerator() {
 
 passwordArray = [];
 generatedPassword = "";
-
 passwordLength = prompt('How many characters you would like in your password?');
 
+// error handling
 if (passwordLength < 8 || passwordLength > 128) {
   alert('Password needs to be between 8 and 128 characters');
   location.reload()
 }
 
+// prompt with options
 getPasswordOptions('Do you want to include special characters?', specialCharacters);
 
 getPasswordOptions('Do you want to include numeric characters?', numericCharacters);
@@ -149,16 +146,16 @@ getPasswordOptions('Do you want to include uppercase characters?', upperCasedCha
 
 getPasswordOptions('Do you want to include lowercase characters?', lowerCasedCharacters);
 
+// password generation and output
 if (passwordArray.length < 1) {
   alert('You need to include at least one type of characters');
   location.reload()
 } else {
-  console.log(passwordArray);
   generatePassword(passwordArray);
-  console.log(generatedPassword);
   writePassword();
   }
 }
+// END OF RUN GENERATOR FUNCTION
 
 
 
