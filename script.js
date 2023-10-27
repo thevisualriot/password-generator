@@ -106,7 +106,6 @@ generateBtn.addEventListener('click', runGenerator);
 function getPasswordOptions(message, array) {
   if (confirm(message)) {
     passwordArray = passwordArray.concat(array);
-    console.log(passwordArray);
   }
 }
 
