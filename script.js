@@ -133,10 +133,10 @@ function runGenerator() {
   // error handling
   if(!passwordLength) {
     location.reload();
-  } else if (passwordLength < 8 || passwordLength > 128) {
+  } else if (passwordLength < 8 || passwordLength > 128 || passwordLength != typeof(number)) {
     alert('Your password must be between 8 and 128 characters in length.');
     location.reload();
-  }
+  } 
 
   // prompt with options
   getPasswordOptions('Would you like to include special characters?', specialCharacters);
