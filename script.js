@@ -91,7 +91,6 @@ var upperCasedCharacters = [
 
 var passwordLength;
 var passwordArray = [];
-var shuffledArray = [];
 var generatedPassword = "";
 
 // Get references to the #generate element
@@ -100,26 +99,20 @@ var generateBtn = document.querySelector('#generate');
 // Add event listener to generate button
 generateBtn.addEventListener('click', runGenerator);
 
-
 // Function to prompt user for password options and store their choice in the passwordArray
 function getPasswordOptions(message, array) {
   if (confirm(message)) {
     passwordArray = passwordArray.concat(array);
+    console.log(passwordArray);
   }
 }
 
-// Function for shuffling array to generate password
-function shuffleArray(arr) {
-  for (i = 0; i < arr.length; i++) {
-    var random = Math.floor(Math.random() * arr.length);
-    shuffledArray.push(arr[random]);
-  }
-}
 
-// Function to generate password with user input, from a shuffled array
+// Function to generate randomized password with user input
 function generatePassword(array) {
   for(i = 0; i < passwordLength; i++){
-    generatedPassword += array[i].toString();
+    var random = Math.floor(Math.random() * array.length);
+    generatedPassword += array[random].toString();
   }
 }
 
@@ -137,6 +130,9 @@ function writePassword() {
 
 
 function runGenerator() {
+
+passwordArray = [];
+generatedPassword = "";
 
 passwordLength = prompt('How many characters you would like in your password?');
 
@@ -157,8 +153,9 @@ if (passwordArray.length < 1) {
   alert('You need to include at least one type of characters');
   location.reload()
 } else {
-  shuffleArray(passwordArray);
-  generatePassword(shuffledArray);
+  console.log(passwordArray);
+  generatePassword(passwordArray);
+  console.log(generatedPassword);
   writePassword();
   }
 }
