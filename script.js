@@ -125,32 +125,31 @@ function writePassword() {
 
 // RUN GENERATOR FUNCTION
 function runGenerator() {
+  passwordArray = [];
+  generatedPassword = "";
+  passwordLength = prompt('How many characters you would like in your password?');
 
-passwordArray = [];
-generatedPassword = "";
-passwordLength = prompt('How many characters you would like in your password?');
-
-// error handling
-if (passwordLength < 8 || passwordLength > 128) {
-  alert('Password needs to be between 8 and 128 characters');
-  location.reload()
-}
-
-// prompt with options
-getPasswordOptions('Do you want to include special characters?', specialCharacters);
-
-getPasswordOptions('Do you want to include numeric characters?', numericCharacters);
-
-getPasswordOptions('Do you want to include uppercase characters?', upperCasedCharacters);
-
-getPasswordOptions('Do you want to include lowercase characters?', lowerCasedCharacters);
-
-// password generation and output
-if (passwordArray.length < 1) {
-  alert('You need to include at least one type of characters');
-  location.reload()
-} else {
-  generatePassword(passwordArray);
-  writePassword();
+  // error handling
+  if (passwordLength < 8 || passwordLength > 128) {
+    alert('Password needs to be between 8 and 128 characters');
+    location.reload();
   }
+
+  // prompt with options
+  getPasswordOptions('Do you want to include special characters?', specialCharacters);
+
+  getPasswordOptions('Do you want to include numeric characters?', numericCharacters);
+
+  getPasswordOptions('Do you want to include uppercase characters?', upperCasedCharacters);
+
+  getPasswordOptions('Do you want to include lowercase characters?', lowerCasedCharacters);
+
+  // password generation and output
+  if (passwordArray.length < 1) {
+    alert('You need to include at least one type of characters');
+    location.reload()
+  } else {
+    generatePassword(passwordArray);
+    writePassword();
+    }
 }
