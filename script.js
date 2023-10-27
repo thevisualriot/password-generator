@@ -129,28 +129,28 @@ function writePassword() {
 function runGenerator() {
   passwordArray = [];
   generatedPassword = "";
-  passwordLength = prompt('How many characters you would like in your password?');
+  passwordLength = prompt('Choose the length of your password: (8 to 128 characters)');
 
   // error handling
   if(!passwordLength) {
     location.reload();
   } else if (passwordLength < 8 || passwordLength > 128) {
-    alert('Password needs to be between 8 and 128 characters');
+    alert('Your password must be between 8 and 128 characters in length.');
     location.reload();
   }
 
   // prompt with options
-  getPasswordOptions('Do you want to include special characters?', specialCharacters);
+  getPasswordOptions('Would you like to include special characters?', specialCharacters);
 
-  getPasswordOptions('Do you want to include numeric characters?', numericCharacters);
+  getPasswordOptions('Would you like to include numeric characters?', numericCharacters);
 
-  getPasswordOptions('Do you want to include uppercase characters?', upperCasedCharacters);
+  getPasswordOptions('Would you like to include uppercase characters?', upperCasedCharacters);
 
-  getPasswordOptions('Do you want to include lowercase characters?', lowerCasedCharacters);
+  getPasswordOptions('Would you like to include lowercase characters?', lowerCasedCharacters);
 
   // password generation and output
   if (passwordArray.length < 1) {
-    alert('You need to include at least one type of characters');
+    alert('Ensure your password includes at least one character type.');
     location.reload()
   } else {
     generatePassword(passwordArray);
