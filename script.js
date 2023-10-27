@@ -93,23 +93,22 @@ var shuffledArray = [];
 var generatedPassword = "";
 
 
-// Function to prompt user for password options
-function getPasswordOptions(message, arr) {
+// Function to prompt user for password options and record their choice in the array
+function getPasswordOptions(message, array) {
   if (confirm(message)) {
-    arr.forEach(addToArray);
+    array.forEach(addToArray);
   }
 }
 
-// Function for getting a random element from an array
-function getRandom(arr) {
+// Function for shuffling array to generate password
+function shuffleArray(arr) {
   for (i = 0; i < arr.length; i++) {
     var random = Math.floor(Math.random() * arr.length);
     shuffledArray.push(arr[random]);
   }
 }
 
-
-// Function to generate password with user input
+// Function to generate password with user input, from a shuffled array
 function generatePassword(array) {
   for(i = 0; i < passwordLength; i++){
     generatedPassword += array[i].toString();
@@ -135,7 +134,6 @@ function addToArray(i) {
 generateBtn.addEventListener('click', runGenerator);
 
 
-/* --------------------------------- MY CODE ---------------------------*/
 
 var passwordArray = [];
 var passwordLength;
@@ -145,12 +143,10 @@ function runGenerator() {
 
 passwordLength = prompt('How many characters you would like in your password?');
 
-
 if (passwordLength < 8 || passwordLength > 128) {
   alert('Password needs to be between 8 and 128 characters');
   location.reload()
 }
-
 
 getPasswordOptions('Do you want to include special characters?', specialCharacters);
 
@@ -160,34 +156,14 @@ getPasswordOptions('Do you want to include uppercase characters?', upperCasedCha
 
 getPasswordOptions('Do you want to include lowercase characters?', lowerCasedCharacters);
 
-// if (getPasswordOptions('Do you want to include special characters?')) {
-//   specialCharacters.forEach(addToArray);
-// }
-
-// if (getPasswordOptions('Do you want to include numeric characters?')) {
-//   numericCharacters.forEach(addToArray)
-// }
-
-// if (getPasswordOptions('Do you want to include uppercase?')) {
-//   upperCasedCharacters.forEach(addToArray)
-// }
-
-// if (getPasswordOptions('Do you want to include lowercase?')) {
-//   lowerCasedCharacters.forEach(addToArray)
-// }
-
-console.log(passwordArray);
-
 if (passwordArray.length < 1) {
   alert('You need to include at least one type of characters');
   location.reload()
 } else {
-  getRandom(passwordArray);
+  shuffle(passwordArray);
   generatePassword(shuffledArray);
   writePassword();
-  console.log("shuffled: " + shuffledArray);
-  console.log("Generated password: " + generatedPassword);
-}
+  }
 }
 
 
