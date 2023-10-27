@@ -129,11 +129,13 @@ function runGenerator() {
   passwordArray = [];
   generatedPassword = "";
   passwordLength = prompt('Choose the length of your password: (8 to 128 characters)');
+  // passwordLength = parseInt(passwordLength);
+  // console.log(typeof(passwordLength));
 
   // error handling
   if(!passwordLength) {
     location.reload();
-  } else if (passwordLength < 8 || passwordLength > 128 || passwordLength != typeof(number)) {
+  } else if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
     alert('Your password must be between 8 and 128 characters in length.');
     location.reload();
   } 
