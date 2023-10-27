@@ -89,14 +89,22 @@ var upperCasedCharacters = [
 ];
 
 
+var passwordLength;
+var passwordArray = [];
 var shuffledArray = [];
 var generatedPassword = "";
 
+// Get references to the #generate element
+var generateBtn = document.querySelector('#generate');
 
-// Function to prompt user for password options and record their choice in the array
+// Add event listener to generate button
+generateBtn.addEventListener('click', runGenerator);
+
+
+// Function to prompt user for password options and store their choice in the passwordArray
 function getPasswordOptions(message, array) {
   if (confirm(message)) {
-    array.forEach(addToArray);
+    passwordArray = passwordArray.concat(array);
   }
 }
 
@@ -115,28 +123,17 @@ function generatePassword(array) {
   }
 }
 
-// Get references to the #generate element
-var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
   var password = generatedPassword;
   var passwordText = document.querySelector('#password');
-
   passwordText.value = password;
 }
 
-function addToArray(i) {
-  passwordArray.push(i);
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener('click', runGenerator);
 
 
 
-var passwordArray = [];
-var passwordLength;
 
 
 function runGenerator() {
@@ -160,7 +157,7 @@ if (passwordArray.length < 1) {
   alert('You need to include at least one type of characters');
   location.reload()
 } else {
-  shuffle(passwordArray);
+  shuffleArray(passwordArray);
   generatePassword(shuffledArray);
   writePassword();
   }
