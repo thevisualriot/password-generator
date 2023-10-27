@@ -88,7 +88,6 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-
 var passwordLength;
 var passwordArray = [];
 var generatedPassword = "";
@@ -155,6 +154,3 @@ if (passwordArray.length < 1) {
   writePassword();
   }
 }
-// END OF RUN GENERATOR FUNCTION
-
-
