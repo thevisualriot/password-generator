@@ -95,6 +95,8 @@ var generatedPassword = "";
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
+// clear the password when the page refreshed
+document.querySelector('#password').value = "";
 
 // Add event listener to generate button
 generateBtn.addEventListener('click', runGenerator);
@@ -130,7 +132,9 @@ function runGenerator() {
   passwordLength = prompt('How many characters you would like in your password?');
 
   // error handling
-  if (passwordLength < 8 || passwordLength > 128) {
+  if(!passwordLength) {
+    location.reload();
+  } else if (passwordLength < 8 || passwordLength > 128) {
     alert('Password needs to be between 8 and 128 characters');
     location.reload();
   }
