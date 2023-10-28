@@ -93,7 +93,6 @@ var passwordArray = [];
 var generatedPassword = "";
 var specialChar, numericChar, upperChar, lowerChar;
 var specialCharIncluded, numericCharIncluded, upperCharIncluded, lowerCharIncluded;
-var included;
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
@@ -115,6 +114,7 @@ function getPasswordOptions(message, array) {
 
 // Generate randomized password with user input
 function generatePassword(array) {
+  generatedPassword = "";
   for(i = 0; i < passwordLength; i++){
     var random = Math.floor(Math.random() * array.length);
     generatedPassword += array[random].toString();
@@ -126,14 +126,13 @@ function generatePassword(array) {
   lowerCharIncluded = includeAllRequiredCharacters(lowerChar, lowerCasedCharacters);
 
   if (!specialCharIncluded || !numericCharIncluded || !upperCharIncluded || !lowerCharIncluded){
-    generatedPassword = "";
-    generatePassword(array)
+    generatePassword(array);
   }
 }
 
 // verify if at least one character of selected is used
 function includeAllRequiredCharacters(type, array) {
-  return !type || array.some(item => generatedPassword.includes(item))
+  return !type || array.some(item => generatedPassword.includes(item));
 }
 
 // Write password to the #password input
