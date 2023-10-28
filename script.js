@@ -91,6 +91,9 @@ var upperCasedCharacters = [
 var passwordLength;
 var passwordArray = [];
 var generatedPassword = "";
+var specialChar, numericChar, upperChar, lowerChar;
+var specialCharIncluded, numericCharIncluded, upperCharIncluded, lowerCharIncluded;
+var included;
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
@@ -106,6 +109,7 @@ generateBtn.addEventListener('click', runGenerator);
 function getPasswordOptions(message, array) {
   if (confirm(message)) {
     passwordArray = passwordArray.concat(array);
+    return true;
   }
 }
 
@@ -115,6 +119,21 @@ function generatePassword(array) {
     var random = Math.floor(Math.random() * array.length);
     generatedPassword += array[random].toString();
   }
+
+  specialCharIncluded = includeAllRequiredCharacters(specialChar, specialCharacters);
+  numericCharIncluded = includeAllRequiredCharacters(numericChar, numericCharacters);
+  upperCharIncluded = includeAllRequiredCharacters(upperChar, upperCasedCharacters);
+  lowerCharIncluded = includeAllRequiredCharacters(lowerChar, lowerCasedCharacters);
+
+  if (!specialCharIncluded || !numericCharIncluded || !upperCharIncluded || !lowerCharIncluded){
+    generatedPassword = "";
+    generatePassword(array)
+  }
+}
+
+// verify if at least one character of selected is used
+function includeAllRequiredCharacters(type, array) {
+  return !type || array.some(item => generatedPassword.includes(item))
 }
 
 // Write password to the #password input
@@ -129,8 +148,6 @@ function runGenerator() {
   passwordArray = [];
   generatedPassword = "";
   passwordLength = prompt('Choose the length of your password: (8 to 128 characters)');
-  // passwordLength = parseInt(passwordLength);
-  // console.log(typeof(passwordLength));
 
   // error handling
   if(!passwordLength) {
@@ -141,13 +158,10 @@ function runGenerator() {
   } 
 
   // prompt with options
-  getPasswordOptions('Would you like to include special characters?', specialCharacters);
-
-  getPasswordOptions('Would you like to include numeric characters?', numericCharacters);
-
-  getPasswordOptions('Would you like to include uppercase characters?', upperCasedCharacters);
-
-  getPasswordOptions('Would you like to include lowercase characters?', lowerCasedCharacters);
+  specialChar = getPasswordOptions('Would you like to include special characters?', specialCharacters);
+  numericChar = getPasswordOptions('Would you like to include numeric characters?', numericCharacters);
+  upperChar = getPasswordOptions('Would you like to include uppercase characters?', upperCasedCharacters);
+  lowerChar = getPasswordOptions('Would you like to include lowercase characters?', lowerCasedCharacters);
 
   // password generation and output
   if (passwordArray.length < 1) {
