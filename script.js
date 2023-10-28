@@ -151,6 +151,7 @@ function runGenerator() {
   // error handling
   if(!passwordLength) {
     location.reload();
+    return;
   } else if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
     alert('Your password must be between 8 and 128 characters in length.');
     location.reload();
