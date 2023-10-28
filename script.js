@@ -154,6 +154,7 @@ function runGenerator() {
   } else if (passwordLength < 8 || passwordLength > 128 || isNaN(passwordLength)) {
     alert('Your password must be between 8 and 128 characters in length.');
     location.reload();
+    return;
   } 
 
   // prompt with options
@@ -166,6 +167,7 @@ function runGenerator() {
   if (passwordArray.length < 1) {
     alert('Ensure your password includes at least one character type.');
     location.reload()
+    return;
   } else {
     generatePassword(passwordArray);
     writePassword();
